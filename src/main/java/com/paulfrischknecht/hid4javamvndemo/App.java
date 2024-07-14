@@ -36,7 +36,7 @@ public class App
         for (HidDevice hidDevice : hidServices.getAttachedHidDevices()) {
             System.out.println(hidDevice);
 
-            hidDevice.open();
+            if (!hidDevice.open()) throw new IllegalStateException("failed to open device! do you need to run as sudo?");
             //hidDevice.write(new byte[]{1, 's'}, 1, (byte)63 ); // reportid = '?'
             
             Byte[] read = hidDevice.read(63, 1000);
