@@ -32,8 +32,12 @@ public class App
         hidServices.start();
 
         // Provide a list of attached devices
+        if (hidServices.getAttachedHidDevices().isEmpty()) throw new IllegalStateException("no hid devices found, please attach something we cannot validate if the library works otherwise");
         for (HidDevice hidDevice : hidServices.getAttachedHidDevices()) {
             System.out.println(hidDevice);
+
+            hidDevice.open();
+            hidDevice.close();
         }
 
         // requird because apparently hid4java starts some threads, otherwise:
