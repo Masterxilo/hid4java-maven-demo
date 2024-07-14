@@ -37,8 +37,13 @@ public class App
             System.out.println(hidDevice);
 
             hidDevice.open();
+            //hidDevice.write(new byte[]{1, 's'}, 1, (byte)63 ); // reportid = '?'
+            
+            Byte[] read = hidDevice.read(63, 1000);
+            System.out.println("read: " + read);
             hidDevice.close();
         }
+        System.out.println( "devices enumerated" );
 
         // requird because apparently hid4java starts some threads, otherwise:
         /*
